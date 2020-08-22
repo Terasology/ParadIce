@@ -5,10 +5,11 @@
     "displayName" : "ParadIce",
     "description" : "A frozen land of ice and snow beneath a gentle tropical breeze",
     "dependencies" : [
-        {"id": "BiomesAPI", "minVersion": "1.0.0"},
-        {"id": "CoreBlocks", "minVersion": "1.0.0"},
-        {"id": "Core", "minVersion": "2.2.1"},
-        {"id": "PlantPack", "minVersion": "1.0.0"}
+        {"id": "BiomesAPI", "minVersion": "4.0.0"},
+        {"id": "CoreAssets", "minVersion": "2.0.0"},
+        {"id": "CoreWorlds", "minVersion": "1.0.0"},
+        {"id": "PlantPack", "minVersion": "1.0.0"},
+        {"id": "CoreBlocks", "minVersion": "1.0.1-SNAPSHOT"}
     ],
     "serverSideOnly" : false,
     "isGameplay" : "true",
