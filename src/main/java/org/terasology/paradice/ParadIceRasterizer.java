@@ -47,11 +47,11 @@ public class ParadIceRasterizer implements WorldRasterizer {
     public void initialize() {
         BlockManager blockManager = CoreRegistry.get(BlockManager.class);
         biomeRegistry = CoreRegistry.get(BiomeRegistry.class);
-        stone = blockManager.getBlock("CoreBlocks:Stone");
-        water = blockManager.getBlock("CoreBlocks:Water");
-        ice = blockManager.getBlock("CoreBlocks:Ice");
-        snow = blockManager.getBlock("CoreBlocks:Snow");
-        dirt = blockManager.getBlock("CoreBlocks:Dirt");
+        stone = blockManager.getBlock("CoreAssets:Stone");
+        water = blockManager.getBlock("CoreAssets:Water");
+        ice = blockManager.getBlock("CoreAssets:Ice");
+        snow = blockManager.getBlock("CoreAssets:Snow");
+        dirt = blockManager.getBlock("CoreAssets:Dirt");
     }
 
     @Override
