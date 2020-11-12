@@ -18,7 +18,7 @@ package org.terasology.paradice;
 import org.terasology.biomesAPI.Biome;
 import org.terasology.biomesAPI.BiomeRegistry;
 import org.terasology.core.world.generator.facets.BiomeFacet;
-import org.terasology.math.TeraMath;
+import org.terasology.math.JomlUtil;
 import org.terasology.math.geom.Vector2i;
 import org.terasology.math.geom.Vector3i;
 import org.terasology.registry.CoreRegistry;
@@ -31,8 +31,8 @@ import org.terasology.world.generation.WorldRasterizer;
 import org.terasology.world.generation.facets.DensityFacet;
 import org.terasology.world.generation.facets.SeaLevelFacet;
 import org.terasology.world.generation.facets.SurfaceDepthFacet;
-import org.terasology.world.generation.facets.SurfaceHeightFacet;
 import org.terasology.world.generation.facets.SurfaceTemperatureFacet;
+import org.terasology.world.generation.facets.SurfacesFacet;
 
 public class ParadIceRasterizer implements WorldRasterizer {
 
@@ -57,7 +57,7 @@ public class ParadIceRasterizer implements WorldRasterizer {
     @Override
     public void generateChunk(CoreChunk chunk, Region chunkRegion) {
         DensityFacet solidityFacet = chunkRegion.getFacet(DensityFacet.class);
-        SurfaceHeightFacet surfaceFacet = chunkRegion.getFacet(SurfaceHeightFacet.class);
+        SurfacesFacet surfaceFacet = chunkRegion.getFacet(SurfacesFacet.class);
         SurfaceDepthFacet surfaceDepthFacet = chunkRegion.getFacet(SurfaceDepthFacet.class);
         BiomeFacet biomeFacet = chunkRegion.getFacet(BiomeFacet.class);
         SeaLevelFacet seaLevelFacet = chunkRegion.getFacet(SeaLevelFacet.class);
@@ -79,36 +79,17 @@ public class ParadIceRasterizer implements WorldRasterizer {
 
             float density = solidityFacet.get(pos);
 
-            if (density >= 32) {
+            if (surfaceFacet.get(JomlUtil.from(pos)) && posY >= seaLevel) {
+                chunk.setBlock(pos, snow);
+            } else if (density > 0 && density < 32) {
+                chunk.setBlock(pos, dirt);
+            } else if (density >= 32) {
                 chunk.setBlock(pos, stone);
-            } else if (density >= 0) {
-                int depth = TeraMath.floorToInt(surfaceFacet.get(pos2d)) - posY;
-                Block block = getSurfaceBlock(depth, posY,
-                        biome,
-                        seaLevel);
-                chunk.setBlock(pos, block);
-            } else {
-                // fill up terrain up to sealevel height with water or ice
-                if (posY == seaLevel && surfaceTemperatureFacet.get(pos.x, pos.y) <= 0.2F) {
-                    chunk.setBlock(pos, ice);
-                } else if (posY <= seaLevel) {         // either OCEAN or SNOW
-                    chunk.setBlock(pos, water);
-//                }
-                }
+            } else if (posY == seaLevel && surfaceTemperatureFacet.get(pos.x, pos.y) <= 0.2F) {
+                chunk.setBlock(pos, ice);
+            } else if (posY <= seaLevel) {
+                chunk.setBlock(pos, water);
             }
-        }
-    }
-
-    private Block getSurfaceBlock(int depth, int height, Biome type, int seaLevel) {
-        if (depth == 0 && height > seaLevel) {
-            // Snow on top
-            return snow;
-        } else if (depth > 32) {
-            // Stone
-            return stone;
-        } else {
-            // Dirt
-            return dirt;
         }
     }
 }

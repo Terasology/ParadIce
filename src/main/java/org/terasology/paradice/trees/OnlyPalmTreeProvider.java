@@ -29,15 +29,14 @@ import org.terasology.world.generation.GeneratingRegion;
 import org.terasology.world.generation.Produces;
 import org.terasology.world.generation.Requires;
 import org.terasology.world.generation.facets.SeaLevelFacet;
-import org.terasology.world.generation.facets.SurfaceHeightFacet;
-import org.terasology.paradice.trees.GenericTrees;
+import org.terasology.world.generation.facets.SurfacesFacet;
 
 import java.util.List;
 
 @Produces(TreeFacet.class)
 @Requires({
         @Facet(value = SeaLevelFacet.class, border = @FacetBorder(sides = 13)),
-        @Facet(value = SurfaceHeightFacet.class, border = @FacetBorder(sides = 13 + 1)),
+        @Facet(value = SurfacesFacet.class, border = @FacetBorder(sides = 13 + 1, bottom = 32 + 11)),
         @Facet(value = BiomeFacet.class, border = @FacetBorder(sides = 13))
 })
 public class OnlyPalmTreeProvider extends DefaultTreeProvider {
@@ -68,7 +67,7 @@ public class OnlyPalmTreeProvider extends DefaultTreeProvider {
 
     @Override
     public void process(GeneratingRegion region) {
-        SurfaceHeightFacet surface = region.getRegionFacet(SurfaceHeightFacet.class);
+        SurfacesFacet surface = region.getRegionFacet(SurfacesFacet.class);
         BiomeFacet biome = region.getRegionFacet(BiomeFacet.class);
 
         List<Predicate<Vector3i>> filters = getFilters(region);
