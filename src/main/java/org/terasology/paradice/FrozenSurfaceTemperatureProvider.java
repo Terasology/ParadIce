@@ -15,9 +15,7 @@
  */
 package org.terasology.paradice;
 
-import org.terasology.core.world.generator.facetProviders.SimplexSurfaceTemperatureProvider;
-import org.terasology.math.TeraMath;
-import org.terasology.math.geom.Vector2f;
+import org.joml.Vector2f;
 import org.terasology.utilities.procedural.BrownianNoise;
 import org.terasology.utilities.procedural.PerlinNoise;
 import org.terasology.utilities.procedural.SubSampledNoise;

@@ -77,7 +77,7 @@ public class ParadIceRasterizer implements WorldRasterizer {
             Biome biome = biomeFacet.get(pos2d);
             biomeRegistry.setBiome(biome, chunk, pos.x, pos.y, pos.z);
 
-            float density = solidityFacet.get(pos);
+            float density = solidityFacet.get(JomlUtil.from(pos));
 
             if (surfaceFacet.get(JomlUtil.from(pos)) && posY >= seaLevel) {
                 chunk.setBlock(pos, snow);
