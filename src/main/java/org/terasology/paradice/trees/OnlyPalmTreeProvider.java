@@ -16,12 +16,12 @@
 package org.terasology.paradice.trees;
 
 import com.google.common.base.Predicate;
+import org.joml.Vector3i;
 import org.terasology.core.world.CoreBiome;
 import org.terasology.core.world.generator.facetProviders.DefaultTreeProvider;
 import org.terasology.core.world.generator.facets.BiomeFacet;
 import org.terasology.core.world.generator.facets.TreeFacet;
 import org.terasology.core.world.generator.trees.Trees;
-import org.terasology.math.geom.Vector3i;
 import org.terasology.world.generation.Border3D;
 import org.terasology.world.generation.Facet;
 import org.terasology.world.generation.FacetBorder;
