@@ -17,6 +17,8 @@ package org.terasology.paradice;
 
 import org.terasology.core.world.generator.facetProviders.BiomeProvider;
 import org.terasology.core.world.generator.facetProviders.DefaultFloraProvider;
+import org.terasology.core.world.generator.facetProviders.DefaultTreeProvider;
+import org.terasology.core.world.generator.facetProviders.DensityNoiseProvider;
 import org.terasology.core.world.generator.facetProviders.PerlinBaseSurfaceProvider;
 import org.terasology.core.world.generator.facetProviders.PerlinHillsAndMountainsProvider;
 import org.terasology.core.world.generator.facetProviders.PerlinHumidityProvider;
@@ -24,6 +26,12 @@ import org.terasology.core.world.generator.facetProviders.PerlinOceanProvider;
 import org.terasology.core.world.generator.facetProviders.PerlinRiverProvider;
 import org.terasology.core.world.generator.facetProviders.PlateauProvider;
 import org.terasology.core.world.generator.facetProviders.SeaLevelProvider;
+import org.terasology.core.world.generator.facetProviders.SimplexBaseSurfaceProvider;
+import org.terasology.core.world.generator.facetProviders.SimplexHumidityProvider;
+import org.terasology.core.world.generator.facetProviders.SimplexRiverProvider;
+import org.terasology.core.world.generator.facetProviders.SimplexRoughnessProvider;
+import org.terasology.core.world.generator.facetProviders.SimplexSurfaceTemperatureProvider;
+import org.terasology.core.world.generator.facetProviders.SpawnPlateauProvider;
 import org.terasology.core.world.generator.facetProviders.SurfaceToDensityProvider;
 import org.terasology.engine.SimpleUri;
 import org.terasology.entitySystem.entity.EntityRef;
@@ -42,7 +50,9 @@ import org.terasology.paradice.trees.*;
 @RegisterWorldGenerator(id = "paradice", displayName = "ParadIce", description = "Chilly palms")
 public class ParadIceAgeWorldGenerator extends BaseFacetedWorldGenerator {
 
-    private final FixedSpawner spawner = new FixedSpawner(0, 0);
+    private static final ImmutableVector2i SPAWN_POS = new ImmutableVector2i(0, 0);
+
+    private final FixedSpawner spawner = new FixedSpawner(SPAWN_POS.x(), SPAWN_POS.y());
 
     @In
     private WorldGeneratorPluginLibrary worldGeneratorPluginLibrary;
@@ -59,23 +69,21 @@ public class ParadIceAgeWorldGenerator extends BaseFacetedWorldGenerator {
     @Override
     protected WorldBuilder createWorld() {
         int seaLevel = 64;
-        ImmutableVector2i spawnPos = new ImmutableVector2i(0, 0); // as used by the spawner
 
         return new WorldBuilder(worldGeneratorPluginLibrary)
                 .setSeaLevel(seaLevel)
                 .addProvider(new SeaLevelProvider(seaLevel))
-                .addProvider(new PerlinHumidityProvider())
+                .addProvider(new SimplexHumidityProvider())
                 .addProvider(new FrozenSurfaceTemperatureProvider())
-                .addProvider(new PerlinBaseSurfaceProvider())
-                .addProvider(new PerlinRiverProvider())
-                .addProvider(new PerlinOceanProvider())
-                .addProvider(new PerlinHillsAndMountainsProvider())
+                .addProvider(new SimplexBaseSurfaceProvider())
+                .addProvider(new SimplexRiverProvider())
+                .addProvider(new SimplexRoughnessProvider())
                 .addProvider(new BiomeProvider())
                 .addProvider(new SurfaceToDensityProvider())
+                .addProvider(new DensityNoiseProvider())
                 .addProvider(new DefaultFloraProvider())
                 .addProvider(new OnlyPalmTreeProvider())
-                .addProvider(new PlateauProvider(spawnPos, seaLevel + 4, 10, 30))
-                        //.addRasterizer(new GroundRasterizer(blockManager))
+                .addProvider(new SpawnPlateauProvider(SPAWN_POS))
                 .addRasterizer(new ParadIceRasterizer())
                 .addPlugins()
                 .addRasterizer(new PalmTreeRasterizer());
