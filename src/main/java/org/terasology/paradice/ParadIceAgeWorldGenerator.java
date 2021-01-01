@@ -15,6 +15,8 @@
  */
 package org.terasology.paradice;
 
+import org.joml.Vector2i;
+import org.joml.Vector2ic;
 import org.terasology.core.world.generator.facetProviders.BiomeProvider;
 import org.terasology.core.world.generator.facetProviders.DefaultFloraProvider;
 import org.terasology.core.world.generator.facetProviders.DefaultTreeProvider;
@@ -50,7 +52,7 @@ import org.terasology.paradice.trees.*;
 @RegisterWorldGenerator(id = "paradice", displayName = "ParadIce", description = "Chilly palms")
 public class ParadIceAgeWorldGenerator extends BaseFacetedWorldGenerator {
 
-    private static final ImmutableVector2i SPAWN_POS = new ImmutableVector2i(0, 0);
+    private static final Vector2ic SPAWN_POS = new Vector2i(0, 0);
 
     private final FixedSpawner spawner = new FixedSpawner(SPAWN_POS.x(), SPAWN_POS.y());
 
