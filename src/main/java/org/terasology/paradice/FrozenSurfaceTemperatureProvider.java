@@ -38,11 +38,7 @@ public class FrozenSurfaceTemperatureProvider implements FacetProvider {
     @Override
     public void process(GeneratingRegion region) {
         SurfaceTemperatureFacet facet = new SurfaceTemperatureFacet(region.getRegion(), region.getBorderForFacet(SurfaceTemperatureFacet.class));
-        float[] noise = this.temperatureNoise.noise(facet.getWorldRegion());
-
-        for (int i = 0; i < noise.length; ++i) {
-            noise[i] = 0;
-        }
+        float[] noise = this.temperatureNoise.noise(facet.getWorldArea());
 
         facet.set(noise);
         region.setRegionFacet(SurfaceTemperatureFacet.class, facet);
