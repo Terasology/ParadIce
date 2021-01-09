@@ -17,36 +17,27 @@ package org.terasology.paradice;
 
 import org.joml.Vector2i;
 import org.joml.Vector2ic;
+import org.joml.Vector3fc;
 import org.terasology.core.world.generator.facetProviders.BiomeProvider;
 import org.terasology.core.world.generator.facetProviders.DefaultFloraProvider;
-import org.terasology.core.world.generator.facetProviders.DefaultTreeProvider;
 import org.terasology.core.world.generator.facetProviders.DensityNoiseProvider;
-import org.terasology.core.world.generator.facetProviders.PerlinBaseSurfaceProvider;
-import org.terasology.core.world.generator.facetProviders.PerlinHillsAndMountainsProvider;
-import org.terasology.core.world.generator.facetProviders.PerlinHumidityProvider;
-import org.terasology.core.world.generator.facetProviders.PerlinOceanProvider;
-import org.terasology.core.world.generator.facetProviders.PerlinRiverProvider;
-import org.terasology.core.world.generator.facetProviders.PlateauProvider;
 import org.terasology.core.world.generator.facetProviders.SeaLevelProvider;
 import org.terasology.core.world.generator.facetProviders.SimplexBaseSurfaceProvider;
 import org.terasology.core.world.generator.facetProviders.SimplexHumidityProvider;
 import org.terasology.core.world.generator.facetProviders.SimplexRiverProvider;
 import org.terasology.core.world.generator.facetProviders.SimplexRoughnessProvider;
-import org.terasology.core.world.generator.facetProviders.SimplexSurfaceTemperatureProvider;
 import org.terasology.core.world.generator.facetProviders.SpawnPlateauProvider;
 import org.terasology.core.world.generator.facetProviders.SurfaceToDensityProvider;
 import org.terasology.engine.SimpleUri;
 import org.terasology.entitySystem.entity.EntityRef;
 import org.terasology.logic.spawner.FixedSpawner;
-import org.terasology.math.JomlUtil;
-import org.terasology.math.geom.ImmutableVector2i;
-import org.terasology.math.geom.Vector3f;
+import org.terasology.paradice.trees.OnlyPalmTreeProvider;
+import org.terasology.paradice.trees.PalmTreeRasterizer;
 import org.terasology.registry.In;
 import org.terasology.world.generation.BaseFacetedWorldGenerator;
 import org.terasology.world.generation.WorldBuilder;
 import org.terasology.world.generator.RegisterWorldGenerator;
 import org.terasology.world.generator.plugin.WorldGeneratorPluginLibrary;
-import org.terasology.paradice.trees.*;
 /**
  */
 @RegisterWorldGenerator(id = "paradice", displayName = "ParadIce", description = "Chilly palms")
@@ -64,8 +55,8 @@ public class ParadIceAgeWorldGenerator extends BaseFacetedWorldGenerator {
     }
 
     @Override
-    public Vector3f getSpawnPosition(EntityRef entity) {
-        return JomlUtil.from(spawner.getSpawnPosition(getWorld(), entity));
+    public Vector3fc getSpawnPosition(EntityRef entity) {
+        return spawner.getSpawnPosition(getWorld(), entity);
     }
 
     @Override
