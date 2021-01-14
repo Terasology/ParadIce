@@ -15,16 +15,11 @@
  */
 package org.terasology.paradice.trees;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.Lists;
 import org.terasology.core.world.generator.trees.AbstractTreeGenerator;
-import org.terasology.math.geom.Vector3i;
 import org.terasology.utilities.random.Random;
 import org.terasology.world.block.Block;
 import org.terasology.world.block.BlockManager;
 import org.terasology.world.chunks.CoreChunk;
-
-import java.util.List;
 
 public class PalmTreeGenerator extends AbstractTreeGenerator {
 
