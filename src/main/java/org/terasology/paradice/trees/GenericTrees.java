@@ -18,8 +18,8 @@ package org.terasology.paradice.trees;
 import com.google.common.collect.ImmutableMap;
 import org.terasology.core.world.generator.trees.TreeGenerator;
 import org.terasology.core.world.generator.trees.TreeGeneratorLSystem;
-import org.terasology.math.LSystemRule;
-import org.terasology.world.block.BlockUri;
+import org.terasology.engine.math.LSystemRule;
+import org.terasology.engine.world.block.BlockUri;
 
 public final class GenericTrees {
     private GenericTrees() {

@@ -16,8 +16,8 @@
 package org.terasology.paradice.trees;
 
 import org.terasology.core.world.generator.rasterizers.TreeRasterizer;
-import org.terasology.registry.CoreRegistry;
-import org.terasology.world.block.BlockManager;
+import org.terasology.engine.registry.CoreRegistry;
+import org.terasology.engine.world.block.BlockManager;
 
 public class PalmTreeRasterizer extends TreeRasterizer {
 
