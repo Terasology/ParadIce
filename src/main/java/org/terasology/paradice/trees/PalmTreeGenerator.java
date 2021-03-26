@@ -19,7 +19,7 @@ import org.terasology.core.world.generator.trees.AbstractTreeGenerator;
 import org.terasology.engine.utilities.random.Random;
 import org.terasology.engine.world.block.Block;
 import org.terasology.engine.world.block.BlockManager;
-import org.terasology.engine.world.chunks.CoreChunk;
+import org.terasology.engine.world.chunks.Chunk;
 
 public class PalmTreeGenerator extends AbstractTreeGenerator {
 
@@ -53,7 +53,7 @@ public class PalmTreeGenerator extends AbstractTreeGenerator {
     }
 
     @Override
-    public void generate(BlockManager blockManager, CoreChunk view, Random rand, int posX, int posY, int posZ) {
+    public void generate(BlockManager blockManager, Chunk view, Random rand, int posX, int posY, int posZ) {
         int height = rand.nextInt(smallestHeight, tallestHeight + 1);
         Block trunk = blockManager.getBlock(trunkType);
         Block leafNorth = blockManager.getBlock(leafType + ".FRONT");
